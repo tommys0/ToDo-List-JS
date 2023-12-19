@@ -5,15 +5,19 @@ function addTask() {
     if (taskText !== "") {
         const taskList = document.getElementById("taskList");
         const newTask = document.createElement("li");
-        newTask.innerHTML = `<span>${taskText}</span><button onclick="completeTask(this)">Complete</button>`;
-        taskList.appendChild(newTask);
+        newTask.innerHTML = `<input type="checkbox" onchange="completeTask(this)"><span>${taskText}</span>`;
+        taskList.insertBefore(newTask, taskList.firstChild);
         taskInput.value = "";
     } else {
-        alert("Please enter a task!");
+        alert("Please fill the input task box.");
     }
 }
 
-function completeTask(button) {
-    const taskItem = button.parentNode;
-    taskItem.classList.toggle("completed");
+function completeTask(checkbox) {
+    const taskItem = checkbox.parentNode;
+    if (checkbox.checked) {
+        taskItem.classList.add("completed");
+    } else {
+        taskItem.classList.remove("completed");
+    }
 }
